@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Khan's Grill & Chill — Terrace BBQ Night</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%230a0704'/%3E%3Cpath d='M32 58c-11 0-19-8-19-18 0-8 5-13 10-18 4-5 7-9 6-16 12 7 22 19 22 34 0 10-8 18-19 18z' fill='%23C04828'/%3E%3Cpath d='M33 53c-6 0-11-5-11-11 0-5 3-8 6-12 2-3 4-6 3-10 8 6 12 14 12 23 0 6-4 10-10 10z' fill='%23EF9F27'/%3E%3Cpath d='M32 49c-3 0-5-2-5-5 0-3 2-5 4-8 2 3 5 5 5 9 0 2-2 4-4 4z' fill='%23f5e6d0'/%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -47,55 +48,44 @@
 
   /* NAV */
   nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-items:center; justify-content:space-between; padding:20px 40px; background:linear-gradient(to bottom, rgba(10,7,4,0.95), transparent); }
-
-  /* ── LOGO OPTIONS ── */
-  /* Option A: Flame bar stack */
-  .logo-a { display:flex; align-items:center; gap:10px; }
-  .logo-a-flames { display:flex; align-items:flex-end; gap:2px; height:22px; }
-  .logo-a-flame { width:5px; border-radius:50% 50% 30% 30%; animation:logoFlicker 1.5s ease-in-out infinite; transform-origin:bottom center; }
-  .logo-a-flame:nth-child(1) { height:10px; background:var(--dim); animation-delay:0.1s; }
-  .logo-a-flame:nth-child(2) { height:16px; background:var(--ember); animation-delay:0.35s; }
-  .logo-a-flame:nth-child(3) { height:22px; background:var(--flame); animation-delay:0s; }
-  .logo-a-flame:nth-child(4) { height:18px; background:var(--ember); animation-delay:0.5s; }
-  .logo-a-flame:nth-child(5) { height:13px; background:var(--dim); animation-delay:0.2s; }
-  .logo-a-text { font-family:'Cormorant Garamond',serif; font-size:20px; color:var(--cream); letter-spacing:0.05em; }
-  .logo-a-text .amp { color:var(--ember); font-style:italic; }
-  @keyframes logoFlicker { 0%,100% { transform:scaleY(1) scaleX(1); } 33% { transform:scaleY(1.12) scaleX(0.9); } 66% { transform:scaleY(0.9) scaleX(1.08); } }
-
-  /* Option B: Glowing circle ember */
-  .logo-b { display:flex; align-items:center; gap:10px; }
-  .logo-b-icon { width:28px; height:28px; border-radius:50%; background:radial-gradient(circle at 40% 40%, var(--flame), var(--ember)); animation:pulseBraise 2s ease-in-out infinite; box-shadow: 0 0 12px rgba(239,159,39,0.5); display:flex; align-items:center; justify-content:center; font-size:13px; }
-  @keyframes pulseBraise { 0%,100% { box-shadow:0 0 10px rgba(239,159,39,0.4); transform:scale(1); } 50% { box-shadow:0 0 22px rgba(239,159,39,0.7); transform:scale(1.06); } }
-  .logo-b-text { font-family:'Cormorant Garamond',serif; font-size:20px; color:var(--cream); letter-spacing:0.05em; }
-  .logo-b-text .amp { color:var(--ember); font-style:italic; }
-
-  /* Option C: Monogram + underline ember */
-  .logo-c { display:flex; align-items:center; gap:10px; }
-  .logo-c-mono { font-family:'Cormorant Garamond',serif; font-size:26px; font-weight:600; color:var(--flame); letter-spacing:-0.02em; position:relative; line-height:1; }
-  .logo-c-mono::after { content:''; position:absolute; bottom:-3px; left:0; right:0; height:2px; background:linear-gradient(to right, var(--flame), transparent); animation:underlineGlow 2s ease-in-out infinite; }
-  @keyframes underlineGlow { 0%,100% { opacity:0.5; } 50% { opacity:1; } }
-  .logo-c-text { font-family:'Cormorant Garamond',serif; font-size:20px; color:var(--cream); letter-spacing:0.05em; }
-  .logo-c-text .amp { color:var(--ember); font-style:italic; }
-
+  .nav-brand { font-family:'Cormorant Garamond',serif; font-size:20px; color:var(--cream); letter-spacing:0.05em; }
+  .nav-brand .amp { color:var(--ember); font-style:italic; }
   .nav-links { display:flex; gap:28px; }
   .nav-links a { font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:var(--dim); text-decoration:none; transition:color 0.2s; }
   .nav-links a:hover { color:var(--cream); }
 
+  /* HERO EMBER SEAL */
+  .ember-seal{
+    width:110px;
+    height:110px;
+    margin:0 auto 24px;
+    display:grid;
+    place-items:center;
+    border-radius:50%;
+    background:radial-gradient(circle, rgba(239,159,39,.18), rgba(192,72,40,.08) 45%, transparent 70%);
+    border:1px solid rgba(192,72,40,.36);
+    box-shadow:0 0 28px rgba(192,72,40,.16);
+    opacity:0;
+    animation:fadeUp 1s ease .5s forwards, emberPulse 3s ease-in-out 1.5s infinite;
+  }
+  .ember-seal svg{
+    width:65%;
+    height:65%;
+    filter:drop-shadow(0 0 12px rgba(239,159,39,.45)) drop-shadow(0 0 24px rgba(192,72,40,.25));
+    animation:flameBreath 2.5s ease-in-out infinite;
+  }
+  @keyframes emberPulse{
+    0%,100%{ transform:scale(1); box-shadow:0 0 28px rgba(192,72,40,.16); }
+    50%{ transform:scale(1.04); box-shadow:0 0 36px rgba(239,159,39,.22), 0 0 70px rgba(192,72,40,.12); }
+  }
+  @keyframes flameBreath{
+    0%,100%{ transform:scale(1); }
+    50%{ transform:scale(1.08); }
+  }
+
   /* HERO */
   .hero { min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:60px 24px; border-bottom:1px solid var(--border); }
   .hero-tag { font-size:10px; letter-spacing:0.28em; text-transform:uppercase; color:var(--dim); margin-bottom:28px; opacity:0; animation:fadeUp 1s ease 0.3s forwards; }
-  .hero-flames { display:flex; align-items:flex-end; justify-content:center; gap:6px; margin-bottom:32px; opacity:0; animation:fadeUp 1s ease 0.5s forwards; }
-  .flame-shape { border-radius:50% 50% 30% 30%; animation:flicker 1.8s ease-in-out infinite; transform-origin:bottom center; }
-  .flame-shape:nth-child(1) { width:8px; height:18px; background:var(--dim); animation-delay:0.1s; }
-  .flame-shape:nth-child(2) { width:10px; height:26px; background:var(--ember); animation-delay:0.4s; }
-  .flame-shape:nth-child(3) { width:14px; height:38px; background:var(--flame); animation-delay:0s; }
-  .flame-shape:nth-child(4) { width:10px; height:30px; background:var(--ember); animation-delay:0.6s; }
-  .flame-shape:nth-child(5) { width:12px; height:46px; background:var(--flame); animation-delay:0.2s; }
-  .flame-shape:nth-child(6) { width:10px; height:28px; background:var(--ember); animation-delay:0.5s; }
-  .flame-shape:nth-child(7) { width:14px; height:36px; background:var(--flame); animation-delay:0.3s; }
-  .flame-shape:nth-child(8) { width:10px; height:24px; background:var(--ember); animation-delay:0.7s; }
-  .flame-shape:nth-child(9) { width:8px; height:16px; background:var(--dim); animation-delay:0.1s; }
-  @keyframes flicker { 0%,100% { transform:scaleY(1) scaleX(1); } 33% { transform:scaleY(1.1) scaleX(0.93); } 66% { transform:scaleY(0.92) scaleX(1.06); } }
   .hero-title { font-family:'Cormorant Garamond',serif; font-size:clamp(52px,10vw,96px); font-weight:300; line-height:0.95; color:var(--cream); margin-bottom:8px; opacity:0; animation:fadeUp 1.2s ease 0.7s forwards; }
   .hero-title .amp { color:var(--ember); font-style:italic; }
   .hero-subtitle { font-size:11px; letter-spacing:0.22em; text-transform:uppercase; color:var(--dim); margin-bottom:32px; opacity:0; animation:fadeUp 1s ease 0.9s forwards; }
@@ -178,18 +168,9 @@
 <!-- FLOATING BBQ ICONS -->
 <div class="floating-icons" id="floating-icons"></div>
 
-<!-- NAV — Logo Option A (animated flame bars). Change class to logo-b or logo-c for other styles -->
+<!-- NAV -->
 <nav>
-  <div class="logo-a" id="site-logo">
-    <div class="logo-a-flames">
-      <div class="logo-a-flame"></div>
-      <div class="logo-a-flame"></div>
-      <div class="logo-a-flame"></div>
-      <div class="logo-a-flame"></div>
-      <div class="logo-a-flame"></div>
-    </div>
-    <div class="logo-a-text">Khan's <span class="amp">BBQ</span></div>
-  </div>
+  <div class="nav-brand">Khan's <span class="amp">BBQ</span></div>
   <div class="nav-links">
     <a href="#menu">Menu</a>
     <a href="#vibes">Vibes</a>
@@ -200,11 +181,15 @@
 <!-- HERO -->
 <section class="hero">
   <p class="hero-tag">The Khan Family invites you</p>
-  <div class="hero-flames">
-    <div class="flame-shape"></div><div class="flame-shape"></div><div class="flame-shape"></div>
-    <div class="flame-shape"></div><div class="flame-shape"></div><div class="flame-shape"></div>
-    <div class="flame-shape"></div><div class="flame-shape"></div><div class="flame-shape"></div>
+
+  <div class="ember-seal" aria-hidden="true">
+    <svg viewBox="0 0 64 64">
+      <path d="M32 58c-11 0-19-8-19-18 0-8 5-13 10-18 4-5 7-9 6-16 12 7 22 19 22 34 0 10-8 18-19 18z" fill="#C04828"/>
+      <path d="M33 53c-6 0-11-5-11-11 0-5 3-8 6-12 2-3 4-6 3-10 8 6 12 14 12 23 0 6-4 10-10 10z" fill="#EF9F27"/>
+      <path d="M32 49c-3 0-5-2-5-5 0-3 2-5 4-8 2 3 5 5 5 9 0 2-2 4-4 4z" fill="#f5e6d0"/>
+    </svg>
   </div>
+
   <h1 class="hero-title">Grill <span class="amp">&</span> Chill</h1>
   <p class="hero-subtitle">A Khan Terrace Evening &nbsp;·&nbsp; BTM 2nd Stage, Bangalore</p>
   <div class="hero-divider">
@@ -216,7 +201,7 @@
   <div class="hero-details">
     <div class="hero-detail">
       <div class="hd-label">Date</div>
-      <div class="hd-value">Saturday, 7 June</div>
+      <div class="hd-value">Saturday, 6 June</div>
     </div>
     <div class="hero-detail">
       <div class="hd-label">Time</div>
@@ -268,35 +253,39 @@
       </div>
     </div>
 
-    <!-- Row 2: Drinks / Chutneys / Paneer tikka extra -->
+    <!-- Row 2: Drinks / Dips / Extras -->
     <div class="menu-grid-row2">
       <div class="menu-col">
         <div class="menu-col-head">
           <div class="menu-col-icon">🥤</div>
           <div class="menu-col-title">Drinks</div>
         </div>
-        <div class="menu-item">Fresh lime soda <div class="menu-item-dot"></div></div>
+        <div class="menu-item">Fresh Lime Soda <div class="menu-item-dot"></div></div>
         <div class="menu-item">Thums Up <div class="menu-item-dot"></div></div>
         <div class="menu-item">Sprite <div class="menu-item-dot"></div></div>
-        <div class="menu-item">Zero-sugar gang <div class="menu-item-dot"></div></div>
+        <div class="menu-item">Coca-Cola Zero <div class="menu-item-dot"></div></div>
+        <div class="menu-item">Sprite Zero <div class="menu-item-dot"></div></div>
+        <div class="menu-item">Pepsi Zero <div class="menu-item-dot"></div></div>
+        <div class="menu-item">Chilled Water <div class="menu-item-dot"></div></div>
       </div>
       <div class="menu-col">
         <div class="menu-col-head">
-          <div class="menu-col-icon">🌿</div>
-          <div class="menu-col-title">Chutneys</div>
+          <div class="menu-col-icon">🫙</div>
+          <div class="menu-col-title">Dips & Sauces</div>
         </div>
-        <div class="menu-item">Mint chutney <div class="menu-item-dot"></div></div>
-        <div class="menu-item">Mayo <div class="menu-item-dot"></div></div>
+        <div class="menu-item">Mint Chutney <div class="menu-item-dot"></div></div>
+        <div class="menu-item">Garlic Mayo <div class="menu-item-dot"></div></div>
+        <div class="menu-item">Green Chilli Coriander Dip <div class="menu-item-dot"></div></div>
       </div>
       <div class="menu-col">
         <div class="menu-col-head">
-          <div class="menu-col-icon">🧀</div>
+          <div class="menu-col-icon">✨</div>
           <div class="menu-col-title">Extras</div>
         </div>
-        <div class="menu-item">Paneer tikka <div class="menu-item-dot"></div></div>
-        <div class="menu-item">Mushrooms <div class="menu-item-dot"></div></div>
-        <div class="menu-item">Chaat masala <div class="menu-item-dot"></div></div>
-        <div class="menu-item">Butter refills <div class="menu-item-dot"></div></div>
+        <div class="menu-item">Chaat Masala <div class="menu-item-dot"></div></div>
+        <div class="menu-item">Butter Refills <div class="menu-item-dot"></div></div>
+        <div class="menu-item">Lemon Wedges <div class="menu-item-dot"></div></div>
+        <div class="menu-item">Onion Rings <div class="menu-item-dot"></div></div>
       </div>
     </div>
 
@@ -313,8 +302,8 @@
     <div class="mood-grid" id="mood-grid">
       <div class="mood-card" data-tilt><span class="mood-icon">🥖</span><div class="mood-title">Bread Sizzling</div><div class="mood-desc">Butter bread and garlic butter bread hit the grill first, because waiting hungry is not a personality trait.</div></div>
       <div class="mood-card" data-tilt><span class="mood-icon">🍖</span><div class="mood-title">Meat On Rotation</div><div class="mood-desc">Chicken, beef, and mutton come out in smoky batches. Someone will say "just one more piece" at least six times.</div></div>
-      <div class="mood-card" data-tilt><span class="mood-icon">🥤</span><div class="mood-title">Drinks On Ice</div><div class="mood-desc">Fresh lime soda, Thums Up, Sprite, and the zero-sugar gang standing by for serious refreshment duties.</div></div>
-      <div class="mood-card" data-tilt><span class="mood-icon">🌿</span><div class="mood-title">Chutney Politics</div><div class="mood-desc">Mint chutney people, mayo people, peri peri people — everyone gets a side. Nobody needs to be civil about it.</div></div>
+      <div class="mood-card" data-tilt><span class="mood-icon">🥤</span><div class="mood-title">Drinks On Ice</div><div class="mood-desc">Fresh lime soda, Thums Up, Sprite, Coke Zero, Sprite Zero, and Pepsi Zero standing by for serious refreshment duties.</div></div>
+      <div class="mood-card" data-tilt><span class="mood-icon">🌿</span><div class="mood-title">Dip Politics</div><div class="mood-desc">Mint chutney people, garlic mayo people, green chilli coriander people — everyone gets a side.</div></div>
       <div class="mood-card" data-tilt><span class="mood-icon">🌽</span><div class="mood-title">Sides Sneak In</div><div class="mood-desc">Corn, potatoes, pineapple — making an appearance for balance. Mostly so we can pretend this was planned.</div></div>
       <div class="mood-card" data-tilt><span class="mood-icon">🔥</span><div class="mood-title">Grill Supervisors</div><div class="mood-desc">There will be at least two self-appointed experts near the fire. Their qualifications: confidence and a plate.</div></div>
       <div class="mood-card" data-tilt><span class="mood-icon">🌙</span><div class="mood-title">Terrace Breeze</div><div class="mood-desc">Bangalore evening air, smoke drifting up, lights glowing low, and everyone slowly forgetting what time it is.</div></div>
@@ -326,15 +315,15 @@
 <!-- CLOSING QUOTE -->
 <section id="quote">
   <div class="quote-inner">
-    <p class="big-quote">"Attendance is free.<br><strong>Missing it is not."</strong></p>
-    <p class="quote-meta">Saturday 7 June &nbsp;·&nbsp; 7 PM &nbsp;·&nbsp; BTM 2nd Stage, Bangalore</p>
+    <p class="big-quote">No schedule.<br>No speeches.<br><strong>No agenda.</strong></p>
+    <p class="quote-meta">Just food, fire, family &nbsp;·&nbsp; and a Bangalore night</p>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
   <div class="footer-brand">Khan's Grill <span>&</span> Chill</div>
-  <p class="footer-note">Terrace BBQ Night &nbsp;·&nbsp; BTM 2nd Stage, Bangalore &nbsp;·&nbsp; 7 June 2025</p>
+  <p class="footer-note">Terrace BBQ Night &nbsp;·&nbsp; BTM 2nd Stage, Bangalore &nbsp;·&nbsp; 6 June 2025</p>
 </footer>
 
 <script>
