@@ -4,41 +4,36 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Khan's Grill & Chill — Terrace BBQ Night</title>
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔥</text></svg>">
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔥</text></svg>">
+
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
   :root {
-    --bg: #0a0704;
-    --bg2: #110e09;
-    --bg3: #1a1208;
-    --ember: #C04828;
-    --flame: #EF9F27;
-    --cream: #f5e6d0;
-    --muted: #a0876a;
-    --dim: #5a3d22;
-    --dark: #2e1a0a;
-    --border: #2a1808;
+    --bg: #0a0704; --bg2: #110e09; --bg3: #1a1208;
+    --ember: #C04828; --flame: #EF9F27;
+    --cream: #f5e6d0; --muted: #a0876a; --dim: #5a3d22; --dark: #2e1a0a; --border: #2a1808;
   }
   html { scroll-behavior: smooth; }
   body { background: var(--bg); color: var(--cream); font-family: 'Jost', sans-serif; font-weight: 300; overflow-x: hidden; }
 
-  /* GLOW CURSOR */
-  #glow-cursor {
-    position: fixed;
-    pointer-events: none;
-    z-index: 9999;
-    width: 320px; height: 320px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(239,159,39,0.12) 0%, rgba(192,72,40,0.07) 40%, transparent 70%);
-    transform: translate(-50%, -50%);
-    transition: left 0.08s ease, top 0.08s ease;
-    mix-blend-mode: screen;
+  #glow-cursor { position: fixed; pointer-events: none; z-index: 9999; width: 340px; height: 340px; border-radius: 50%; background: radial-gradient(circle, rgba(239,159,39,0.13) 0%, rgba(192,72,40,0.08) 40%, transparent 70%); transform: translate(-50%, -50%); left: -999px; top: -999px; transition: left 0.07s ease, top 0.07s ease; mix-blend-mode: screen; }
+
+  #mobile-glow { display: none; position: fixed; pointer-events: none; z-index: 9998; width: 100vw; height: 100vh; top: 0; left: 0; background: radial-gradient(ellipse 70% 50% at 50% 80%, rgba(239,159,39,0.10) 0%, rgba(192,72,40,0.06) 40%, transparent 70%); animation: ambientPulse 3s ease-in-out infinite; }
+  @keyframes ambientPulse { 0%,100% { opacity: 0.6; transform: scaleY(1); } 50% { opacity: 1; transform: scaleY(1.08); } }
+
+  #touch-glow { display: none; position: fixed; pointer-events: none; z-index: 9999; width: 260px; height: 260px; border-radius: 50%; background: radial-gradient(circle, rgba(239,159,39,0.18) 0%, rgba(192,72,40,0.10) 45%, transparent 70%); transform: translate(-50%, -50%); mix-blend-mode: screen; transition: left 0.12s ease, top 0.12s ease; left: 50%; top: 60%; }
+
+  @media (hover: none) and (pointer: coarse) {
+    #glow-cursor { display: none !important; }
+    #mobile-glow { display: block; }
+    #touch-glow { display: block; }
   }
 
-  /* STARS */
-  #stars-canvas { position: fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:0; opacity:0.6; }
+  #stars-canvas { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:0; opacity:0.6; }
 
-  /* FLOATING ICONS */
   .floating-icons { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:1; overflow:hidden; }
   .float-icon { position:absolute; font-size:28px; opacity:0; animation:floatUp linear infinite; filter:drop-shadow(0 0 6px rgba(192,72,40,0.4)); }
   @keyframes floatUp { 0% { opacity:0; transform:translateY(0) rotate(0deg) scale(0.8); } 10% { opacity:0.25; } 80% { opacity:0.15; } 100% { opacity:0; transform:translateY(-100vh) rotate(20deg) scale(1.1); } }
@@ -47,9 +42,6 @@
 
   /* NAV */
   nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-items:center; justify-content:space-between; padding:20px 40px; background:linear-gradient(to bottom, rgba(10,7,4,0.95), transparent); }
-
-  /* ── LOGO OPTIONS ── */
-  /* Option A: Flame bar stack */
   .logo-a { display:flex; align-items:center; gap:10px; }
   .logo-a-flames { display:flex; align-items:flex-end; gap:2px; height:22px; }
   .logo-a-flame { width:5px; border-radius:50% 50% 30% 30%; animation:logoFlicker 1.5s ease-in-out infinite; transform-origin:bottom center; }
@@ -61,22 +53,6 @@
   .logo-a-text { font-family:'Cormorant Garamond',serif; font-size:20px; color:var(--cream); letter-spacing:0.05em; }
   .logo-a-text .amp { color:var(--ember); font-style:italic; }
   @keyframes logoFlicker { 0%,100% { transform:scaleY(1) scaleX(1); } 33% { transform:scaleY(1.12) scaleX(0.9); } 66% { transform:scaleY(0.9) scaleX(1.08); } }
-
-  /* Option B: Glowing circle ember */
-  .logo-b { display:flex; align-items:center; gap:10px; }
-  .logo-b-icon { width:28px; height:28px; border-radius:50%; background:radial-gradient(circle at 40% 40%, var(--flame), var(--ember)); animation:pulseBraise 2s ease-in-out infinite; box-shadow: 0 0 12px rgba(239,159,39,0.5); display:flex; align-items:center; justify-content:center; font-size:13px; }
-  @keyframes pulseBraise { 0%,100% { box-shadow:0 0 10px rgba(239,159,39,0.4); transform:scale(1); } 50% { box-shadow:0 0 22px rgba(239,159,39,0.7); transform:scale(1.06); } }
-  .logo-b-text { font-family:'Cormorant Garamond',serif; font-size:20px; color:var(--cream); letter-spacing:0.05em; }
-  .logo-b-text .amp { color:var(--ember); font-style:italic; }
-
-  /* Option C: Monogram + underline ember */
-  .logo-c { display:flex; align-items:center; gap:10px; }
-  .logo-c-mono { font-family:'Cormorant Garamond',serif; font-size:26px; font-weight:600; color:var(--flame); letter-spacing:-0.02em; position:relative; line-height:1; }
-  .logo-c-mono::after { content:''; position:absolute; bottom:-3px; left:0; right:0; height:2px; background:linear-gradient(to right, var(--flame), transparent); animation:underlineGlow 2s ease-in-out infinite; }
-  @keyframes underlineGlow { 0%,100% { opacity:0.5; } 50% { opacity:1; } }
-  .logo-c-text { font-family:'Cormorant Garamond',serif; font-size:20px; color:var(--cream); letter-spacing:0.05em; }
-  .logo-c-text .amp { color:var(--ember); font-style:italic; }
-
   .nav-links { display:flex; gap:28px; }
   .nav-links a { font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:var(--dim); text-decoration:none; transition:color 0.2s; }
   .nav-links a:hover { color:var(--cream); }
@@ -138,11 +114,12 @@
   .mood-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
   .mood-card { background:var(--bg2); border:1px solid var(--border); padding:28px 22px; cursor:default; transition:border-color 0.3s, box-shadow 0.3s; transform-style:preserve-3d; will-change:transform; }
   .mood-card:hover { border-color:var(--ember); box-shadow:0 0 28px rgba(192,72,40,0.15); }
+  .mood-card.tapped { border-color:var(--ember); box-shadow:0 0 32px rgba(239,159,39,0.25); background:var(--bg3); }
   .mood-icon { font-size:28px; margin-bottom:14px; display:block; filter:drop-shadow(0 0 8px rgba(239,159,39,0.3)); }
   .mood-title { font-family:'Cormorant Garamond',serif; font-size:18px; color:var(--cream); margin-bottom:8px; }
   .mood-desc { font-size:12px; color:var(--dim); line-height:1.6; }
 
-  /* QUOTE SECTION */
+  /* QUOTE */
   #quote { border-top:1px solid var(--border); }
   .quote-inner { max-width:700px; margin:0 auto; padding:80px 24px; text-align:center; }
   .big-quote { font-family:'Cormorant Garamond',serif; font-size:clamp(28px,5vw,48px); font-style:italic; color:var(--muted); line-height:1.2; margin-bottom:16px; }
@@ -155,6 +132,7 @@
   .footer-brand span { color:var(--ember); font-style:italic; }
   .footer-note { font-size:10px; letter-spacing:0.15em; text-transform:uppercase; color:var(--dark); }
 
+  /* RESPONSIVE */
   @media (max-width:768px) {
     nav { padding:16px 20px; }
     .nav-links { display:none; }
@@ -165,28 +143,87 @@
     .mood-grid { grid-template-columns:1fr 1fr; }
   }
   @media (max-width:480px) { .mood-grid { grid-template-columns:1fr; } }
+
+  /* ── GAMES ── */
+  #games { border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+  .game-tabs { display:flex; justify-content:center; gap:0; border-bottom:1px solid var(--border); background:var(--bg2); overflow-x:auto; }
+  .game-tab { font-size:10px; letter-spacing:.15em; text-transform:uppercase; color:var(--dim); padding:16px 22px; cursor:pointer; border-bottom:2px solid transparent; transition:color .2s,border-color .2s; white-space:nowrap; background:none; border-top:none; border-left:none; border-right:none; font-family:'Jost',sans-serif; }
+  .game-tab:hover { color:var(--muted); }
+  .game-tab.active { color:var(--flame); border-bottom-color:var(--ember); }
+  .game-panel { display:none; }
+  .game-panel.active { display:block; }
+  .game-inner { max-width:700px; margin:0 auto; padding:60px 24px; }
+  .game-title { font-family:'Cormorant Garamond',serif; font-size:clamp(28px,5vw,44px); font-weight:300; color:var(--cream); margin-bottom:8px; }
+  .game-desc { font-size:13px; color:var(--dim); margin-bottom:28px; max-width:480px; line-height:1.7; }
+  .btn-game { font-family:'Jost',sans-serif; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--bg); background:var(--flame); border:none; padding:13px 36px; cursor:pointer; transition:background .2s; }
+  .btn-game:hover { background:var(--ember); color:#fff; }
+
+  /* Grill Master */
+  #gm-hud { display:flex; justify-content:space-between; max-width:540px; margin:0 auto 12px; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--dim); }
+  #gm-hud span { color:var(--cream); }
+  #gm-canvas-wrap { position:relative; width:100%; max-width:540px; margin:0 auto 20px; background:var(--bg2); border:1px solid var(--border); border-radius:4px; overflow:hidden; cursor:none; }
+  #gm-canvas { display:block; width:100%; height:400px; }
+  #gm-overlay { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; background:rgba(10,7,4,.88); }
+  #gm-overlay h3 { font-family:'Cormorant Garamond',serif; font-size:28px; color:var(--cream); margin-bottom:8px; }
+  #gm-overlay p { font-size:12px; color:var(--dim); margin-bottom:22px; text-align:center; max-width:280px; line-height:1.7; }
+  #gm-result { text-align:center; padding:20px; display:none; }
+  #gm-result h3 { font-family:'Cormorant Garamond',serif; font-size:26px; color:var(--flame); margin-bottom:8px; }
+  #gm-result p { font-size:13px; color:var(--muted); margin-bottom:16px; }
+
+  /* BBQ Tetris */
+  #tet-wrap { display:flex; gap:24px; align-items:flex-start; justify-content:center; flex-wrap:wrap; }
+  #tet-canvas { background:var(--bg2); border:1px solid var(--border); display:block; }
+  #tet-side { min-width:130px; }
+  #tet-side h4 { font-family:'Cormorant Garamond',serif; font-size:20px; color:var(--cream); margin-bottom:16px; }
+  .tet-stat { margin-bottom:14px; }
+  .tet-stat-label { font-size:9px; letter-spacing:.18em; text-transform:uppercase; color:var(--dim); margin-bottom:4px; }
+  .tet-stat-val { font-family:'Cormorant Garamond',serif; font-size:26px; color:var(--cream); }
+  #tet-next { background:var(--bg2); border:1px solid var(--border); margin-top:12px; display:block; }
+  #tet-controls { margin-top:14px; font-size:11px; color:var(--dim); line-height:1.9; }
+  #tet-canvas-wrap { position:relative; display:inline-block; }
+  #tet-overlay { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; background:rgba(10,7,4,.9); }
+  #tet-overlay h3 { font-family:'Cormorant Garamond',serif; font-size:26px; color:var(--cream); margin-bottom:8px; text-align:center; }
+  #tet-overlay p { font-size:12px; color:var(--dim); margin-bottom:18px; text-align:center; max-width:200px; line-height:1.6; }
+  #tet-smoke { position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; overflow:hidden; }
+  .smoke-puff { position:absolute; font-size:22px; animation:smokePuff .8s ease forwards; pointer-events:none; }
+  @keyframes smokePuff { 0%{opacity:1;transform:translateY(0) scale(1)} 100%{opacity:0;transform:translateY(-55px) scale(1.8)} }
+
+
+  /* TAGS */
+  #tags { border-top:1px solid var(--border); }
+  .tags-cloud { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:24px; }
+  .tag { font-size:12px; letter-spacing:.08em; padding:7px 14px; border:1px solid var(--border); color:var(--muted); cursor:pointer; transition:border-color .2s,color .2s,background .2s,transform .15s; user-select:none; }
+  .tag:hover { border-color:var(--ember); color:var(--cream); transform:translateY(-2px); }
+  .tag.copied { border-color:var(--flame); color:var(--flame); background:rgba(239,159,39,.08); }
+  .tags-copy-all { font-family:'Jost',sans-serif; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--dim); background:transparent; border:1px solid var(--border); padding:11px 28px; cursor:pointer; transition:border-color .2s,color .2s; }
+  .tags-copy-all:hover { border-color:var(--muted); color:var(--cream); }
+  .tags-copy-all.done { border-color:var(--ember); color:var(--ember); }
+  .tags-note { font-size:11px; color:var(--dark); margin-top:10px; }
+  .tag-add-row { display:flex; gap:10px; margin-top:4px; max-width:480px; }
+  .tag-input { flex:1; background:transparent; border:1px solid var(--border); color:var(--cream); font-family:'Jost',sans-serif; font-size:13px; font-weight:300; padding:11px 16px; outline:none; transition:border-color .2s; }
+  .tag-input::placeholder { color:var(--dim); }
+  .tag-input:focus { border-color:var(--ember); }
+  .tag-add-btn { font-family:'Jost',sans-serif; font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--bg); background:var(--ember); border:none; padding:11px 22px; cursor:pointer; transition:background .2s; white-space:nowrap; }
+  .tag-add-btn:hover { background:var(--flame); }
+  .tag.custom { border-color:var(--dim); color:var(--muted); position:relative; }
+  .tag.custom .tag-remove { display:inline-block; margin-left:6px; color:var(--dim); font-size:10px; cursor:pointer; }
+  .tag.custom .tag-remove:hover { color:var(--ember); }
 </style>
 </head>
 <body>
 
-<!-- GLOW CURSOR -->
 <div id="glow-cursor"></div>
+<div id="mobile-glow"></div>
+<div id="touch-glow"></div>
 
-<!-- STARS -->
 <canvas id="stars-canvas"></canvas>
-
-<!-- FLOATING BBQ ICONS -->
 <div class="floating-icons" id="floating-icons"></div>
 
-<!-- NAV — Logo Option A (animated flame bars). Change class to logo-b or logo-c for other styles -->
 <nav>
-  <div class="logo-a" id="site-logo">
+  <div class="logo-a">
     <div class="logo-a-flames">
-      <div class="logo-a-flame"></div>
-      <div class="logo-a-flame"></div>
-      <div class="logo-a-flame"></div>
-      <div class="logo-a-flame"></div>
-      <div class="logo-a-flame"></div>
+      <div class="logo-a-flame"></div><div class="logo-a-flame"></div><div class="logo-a-flame"></div>
+      <div class="logo-a-flame"></div><div class="logo-a-flame"></div>
     </div>
     <div class="logo-a-text">Khan's <span class="amp">BBQ</span></div>
   </div>
@@ -194,10 +231,10 @@
     <a href="#menu">Menu</a>
     <a href="#vibes">Vibes</a>
     <a href="#quote">Night</a>
+    <a href="#games" style="color:var(--flame)">🎮 Games</a>
   </div>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
   <p class="hero-tag">The Khan Family invites you</p>
   <div class="hero-flames">
@@ -206,106 +243,74 @@
     <div class="flame-shape"></div><div class="flame-shape"></div><div class="flame-shape"></div>
   </div>
   <h1 class="hero-title">Grill <span class="amp">&</span> Chill</h1>
-  <p class="hero-subtitle">A Khan Terrace Evening &nbsp;·&nbsp; BTM 2nd Stage, Bangalore</p>
+  <p class="hero-subtitle">A Khan Terrace Evening &nbsp;·&nbsp; Darul - Iyman, BTM 2nd Stage, Bangalore</p>
   <div class="hero-divider">
     <div class="hero-divider-line"></div>
     <div class="hero-divider-dot"></div>
     <div class="hero-divider-line"></div>
   </div>
   <p class="hero-slogan">"Skies above. Fire below. Khans in charge."</p>
+  <p style="font-size:11px;letter-spacing:0.12em;color:var(--dim);text-transform:uppercase;">
+  Calories don't count on the terrace.
+</p>
   <div class="hero-details">
-    <div class="hero-detail">
-      <div class="hd-label">Date</div>
-      <div class="hd-value">Saturday, 7 June</div>
-    </div>
-    <div class="hero-detail">
-      <div class="hd-label">Time</div>
-      <div class="hd-value">7 PM onwards</div>
-    </div>
-    <div class="hero-detail">
-      <div class="hd-label">Venue</div>
-      <div class="hd-value">BTM 2nd Stage</div>
-    </div>
+    <div class="hero-detail"><div class="hd-label">Date</div><div class="hd-value">Saturday, 7 June</div></div>
+    <div class="hero-detail"><div class="hd-label">Time</div><div class="hd-value">7 PM onwards</div></div>
+    <div class="hero-detail"><div class="hd-label">Venue</div><div class="hd-value"> Darul - Iyman, BTM 2nd Stage</div></div>
   </div>
 </section>
 
-<!-- MENU -->
 <section id="menu">
   <div class="section-inner">
     <div class="section-label">What's on the grill</div>
     <h2 class="section-title">The Menu</h2>
-
-    <!-- Row 1: Fire / Sides / Bread -->
     <div class="menu-grid">
       <div class="menu-col">
-        <div class="menu-col-head">
-          <div class="menu-col-icon">🔥</div>
-          <div class="menu-col-title">From the fire</div>
-        </div>
+        <div class="menu-col-head"><div class="menu-col-icon">🔥</div><div class="menu-col-title">From the fire</div></div>
         <div class="menu-item">Chicken <div class="menu-item-dot"></div></div>
         <div class="menu-item">Beef <div class="menu-item-dot"></div></div>
-        <div class="menu-item">Mutton <div class="menu-item-dot"></div></div>
-        <div class="menu-item">Seekh / skewers <div class="menu-item-dot"></div></div>
       </div>
       <div class="menu-col">
-        <div class="menu-col-head">
-          <div class="menu-col-icon">🌽</div>
-          <div class="menu-col-title">Sides</div>
-        </div>
+        <div class="menu-col-head"><div class="menu-col-icon">🌽</div><div class="menu-col-title">Sides</div></div>
         <div class="menu-item">Corn on the cob <div class="menu-item-dot"></div></div>
         <div class="menu-item">Grilled potatoes <div class="menu-item-dot"></div></div>
         <div class="menu-item">Pineapple <div class="menu-item-dot"></div></div>
+       <div class="menu-item">Potato Crisps <div class="menu-item-dot"></div></div>
       </div>
       <div class="menu-col">
-        <div class="menu-col-head">
-          <div class="menu-col-icon">🥖</div>
-          <div class="menu-col-title">Bread station</div>
-        </div>
+        <div class="menu-col-head"><div class="menu-col-icon">🥖</div><div class="menu-col-title">Bread station</div></div>
         <div class="menu-item">Butter bread <div class="menu-item-dot"></div></div>
         <div class="menu-item">Garlic butter bread <div class="menu-item-dot"></div></div>
-        <div class="menu-item">Grilled pav <div class="menu-item-dot"></div></div>
         <div class="menu-item">Toast-it-hot refills <div class="menu-item-dot"></div></div>
       </div>
     </div>
-
-    <!-- Row 2: Drinks / Dips & Sauces / Paneer tikka extra -->
     <div class="menu-grid-row2">
       <div class="menu-col">
-        <div class="menu-col-head">
-          <div class="menu-col-icon">🥤</div>
-          <div class="menu-col-title">Drinks</div>
-        </div>
+        <div class="menu-col-head"><div class="menu-col-icon">🥤</div><div class="menu-col-title">Drinks</div></div>
         <div class="menu-item">Fresh lime soda <div class="menu-item-dot"></div></div>
         <div class="menu-item">Thums Up <div class="menu-item-dot"></div></div>
         <div class="menu-item">Sprite <div class="menu-item-dot"></div></div>
         <div class="menu-item">Zero-sugar gang <div class="menu-item-dot"></div></div>
       </div>
       <div class="menu-col">
-        <div class="menu-col-head">
-          <div class="menu-col-icon">🌿</div>
-          <div class="menu-col-title">Chutneys</div>
-        </div>
-        <div class="menu-item">Mint chutney <div class="menu-item-dot"></div></div>
-        <div class="menu-item">Mayo <div class="menu-item-dot"></div></div>
-        <div class="menu-item">Green Chilli Coriander Dip <div class="menu-item-dot"></div></div>
+        <div class="menu-col-head"><div class="menu-col-icon">🥣</div><div class="menu-col-title">Chutneys</div></div>
+        <div class="menu-item">Mint Chutney <div class="menu-item-dot"></div></div>
+        <div class="menu-item">Coriander Chutney<div class="menu-item-dot"></div></div>
+       <div class="menu-item">Mayonnaise <div class="menu-item-dot"></div></div>
       </div>
       <div class="menu-col">
-        <div class="menu-col-head">
-          <div class="menu-col-icon">🧀</div>
-          <div class="menu-col-title">Extras</div>
-        </div>
+        <div class="menu-col-head"><div class="menu-col-icon">🧂</div><div class="menu-col-title">Extras</div></div>
+        <div class="menu-item">Onion <div class="menu-item-dot"></div></div>
+        <div class="menu-item">Lemon wedges <div class="menu-item-dot"></div></div>
+        <div class="menu-item">Cucumber <div class="menu-item-dot"></div></div>
         <div class="menu-item">Chaat masala <div class="menu-item-dot"></div></div>
         <div class="menu-item">Butter refills <div class="menu-item-dot"></div></div>
-       <div class="menu-item">Onion <div class="menu-item-dot"></div></div>
-        <div class="menu-item">Lemon Wedges <div class="menu-item-dot"></div></div>
       </div>
     </div>
-
     <div class="halal-badge">✓ &nbsp; All meats 100% Halal certified</div>
   </div>
 </section>
 
-<!-- VIBES MOOD BOARD -->
 <section id="vibes">
   <div class="section-inner">
     <div class="section-label">How the night flows</div>
@@ -313,10 +318,10 @@
     <p class="vibes-sub">No "7:15 starters, 8:30 mains" business. The grill has one rule: if it is hot, it gets eaten. Hover over the cards — they move with the fire.</p>
     <div class="mood-grid" id="mood-grid">
       <div class="mood-card" data-tilt><span class="mood-icon">🥖</span><div class="mood-title">Bread Sizzling</div><div class="mood-desc">Butter bread and garlic butter bread hit the grill first. Every BBQ needs a proper opening act.</div></div>
-      <div class="mood-card" data-tilt><span class="mood-icon">🍖</span><div class="mood-title">Meat On Rotation</div><div class="mood-desc">Chicken, beef and mutton arrive in smoky batches. The grill keeps moving, and so do the plates.</div></div>
+      <div class="mood-card" data-tilt><span class="mood-icon">🍖</span><div class="mood-title">Meat On Rotation</div><div class="mood-desc">Chicken, beef, and mutton come out in smoky batches. The grill keeps moving, and so do the plates.</div></div>
       <div class="mood-card" data-tilt><span class="mood-icon">🥤</span><div class="mood-title">Drinks On Ice</div><div class="mood-desc">Fresh lime soda, Thums Up, Sprite, and the zero-sugar crew standing by to keep things cool.</div></div>
       <div class="mood-card" data-tilt><span class="mood-icon">🌿</span><div class="mood-title">Chutney Politics</div><div class="mood-desc">Mint chutney, mayo, and green chilli coriander. Different tastes, one plate at a time.</div></div>
-      <div class="mood-card" data-tilt><span class="mood-icon">🌽</span><div class="mood-title">Sides Join The Party</div><div class="mood-desc">Corn, potatoes, and pineapple bringing colour, balance, and surprisingly strong fan followings.</div></div>
+      <div class="mood-card" data-tilt><span class="mood-icon">🌽</span><div class="mood-title">Sides Join The Party</div><div class="mood-desc">Corn, potatoes, pineapple — bringing colour, balance, and surprisingly strong fan followings.</div></div>
       <div class="mood-card" data-tilt><span class="mood-icon">🔥</span><div class="mood-title">Grill Supervisors</div><div class="mood-desc">There will be at least two self-appointed experts near the fire. Their qualifications: confidence and a plate.</div></div>
       <div class="mood-card" data-tilt><span class="mood-icon">🌙</span><div class="mood-title">Terrace Breeze</div><div class="mood-desc">Bangalore evening air, smoke drifting up, lights glowing low, and everyone slowly forgetting what time it is.</div></div>
       <div class="mood-card" data-tilt><span class="mood-icon">✨</span><div class="mood-title">Second Rounds</div><div class="mood-desc">The official schedule says nothing. The unofficial schedule says another round when the next batch smells too good.</div></div>
@@ -324,70 +329,364 @@
   </div>
 </section>
 
-<!-- CLOSING QUOTE -->
-<section id="quote">
-  <div class="quote-inner">
-    <p class="big-quote">"No schedule.<br>No speeches.<br><strong>No agenda."</strong></p>
-    <p class="quote-meta">Just food, fire, family &nbsp;·&nbsp; and a family night BTM 2nd Stage, Bangalore</p>
+<!-- GAMES -->
+<section id="games">
+  <div class="section-inner" style="padding-bottom:0">
+    <div class="section-label">Play while you wait</div>
+    <h2 class="section-title">Party Games</h2>
+  </div>
+  <div class="game-tabs">
+    <button class="game-tab active" data-tab="grill">🔥 Grill Master</button>
+    <button class="game-tab" data-tab="tetris">🧱 BBQ Tetris</button>
+  </div>
+
+  <!-- GRILL MASTER -->
+  <div class="game-panel active" id="panel-grill">
+    <div class="game-inner">
+      <h3 class="game-title">Grill Master</h3>
+      <p class="game-desc">Catch the food before it burns. Move the tray with your mouse or finger. +10 good food · −20 burnt food. Score 100 = Certified Grill Supervisor 👨‍🍳</p>
+      <div id="gm-hud"><div>Score: <span id="gm-score">0</span></div><div>Best: <span id="gm-best">0</span></div><div>Lives: <span id="gm-lives">❤️❤️❤️</span></div></div>
+      <div id="gm-canvas-wrap">
+        <canvas id="gm-canvas"></canvas>
+        <div id="gm-overlay">
+          <h3>Grill Master 🍗</h3>
+          <p>Catch food before it burns.<br>+10 good food &nbsp;·&nbsp; −20 burnt food<br>Score 100 = Certified Grill Supervisor 👨‍🍳</p>
+          <button class="btn-game" id="gm-start-btn">Start Grilling</button>
+        </div>
+      </div>
+      <div id="gm-result"><h3 id="gm-result-title"></h3><p id="gm-result-msg"></p><button class="btn-game" id="gm-retry-btn">Grill Again</button></div>
+    </div>
+  </div>
+
+  <!-- BBQ TETRIS -->
+  <div class="game-panel" id="panel-tetris">
+    <div class="game-inner">
+      <h3 class="game-title">BBQ Tetris</h3>
+      <p class="game-desc">Stack the food on the grill. Clear a row and watch the smoke rise. Arrow keys or swipe to play.</p>
+      <div id="tet-wrap">
+        <div id="tet-canvas-wrap">
+          <canvas id="tet-canvas" width="200" height="400"></canvas>
+          <div id="tet-smoke"></div>
+          <div id="tet-overlay">
+            <h3>BBQ Tetris 🍖</h3>
+            <p>Stack the food. Clear a row. Don't let it pile up.</p>
+            <button class="btn-game" id="tet-start-btn">Start Stacking</button>
+          </div>
+        </div>
+        <div id="tet-side">
+          <h4>Stats</h4>
+          <div class="tet-stat"><div class="tet-stat-label">Score</div><div class="tet-stat-val" id="tet-score">0</div></div>
+          <div class="tet-stat"><div class="tet-stat-label">Lines</div><div class="tet-stat-val" id="tet-lines">0</div></div>
+          <div class="tet-stat"><div class="tet-stat-label">Best</div><div class="tet-stat-val" id="tet-best">0</div></div>
+          <div style="font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-top:14px;margin-bottom:6px">Next</div>
+          <canvas id="tet-next" width="80" height="80"></canvas>
+          <div id="tet-controls">← → Move<br>↑ Rotate<br>↓ Drop<br><br>Mobile: swipe</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   </div>
 </section>
 
-<!-- FOOTER -->
+<!-- PARTY TAGS -->
+<section id="tags">
+  <div class="section-inner">
+    <div class="section-label">For the gram</div>
+    <h2 class="section-title" style="margin-bottom:8px">Party Tags</h2>
+    <p style="font-size:13px;color:var(--dim);margin-bottom:28px">Tap any tag to copy. Use on Instagram, WhatsApp status, wherever the night takes you.</p>
+    <div class="tags-cloud" id="tags-cloud"></div>
+    <div class="tag-add-row">
+      <input class="tag-input" id="tag-input" type="text" placeholder="Add your own tag e.g. #KhanFamily" maxlength="40" />
+      <button class="tag-add-btn" id="tag-add-btn">+ Add</button>
+    </div>
+    <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:20px">
+      <button class="tags-copy-all" id="copy-all-btn">Copy All Tags</button>
+      <button class="tags-copy-all" id="reset-tags-btn" style="color:var(--dim);border-color:var(--dark)">Reset to Default</button>
+    </div>
+    <p class="tags-note" id="tags-note">Tap any tag to copy · Custom tags are saved automatically</p>
+  </div>
+</section>
+
+<section id="quote">
+  <div class="quote-inner">
+    <p class="big-quote">"No schedule.<br>No speeches.<br><strong>No agenda."</strong></p>
+    <p class="quote-meta">Just food, fire, family &nbsp;·&nbsp;  Darul - Iyman, BTM 2nd Stage, Bangalore</p>
+  </div>
+</section>
+
 <footer>
   <div class="footer-brand">Khan's Grill <span>&</span> Chill</div>
-  <p class="footer-note">Terrace BBQ Night &nbsp;·&nbsp; BTM 2nd Stage, Bangalore &nbsp;·&nbsp; 7 June 2025</p>
+  <p class="footer-note">Terrace BBQ Night &nbsp;·&nbsp; at  Darul - Iyman BTM 2nd Stage, Bangalore &nbsp;·&nbsp; 7 June 2026</p>
 </footer>
 
 <script>
-/* STARS */
-const canvas = document.getElementById('stars-canvas');
-const ctx = canvas.getContext('2d');
-let stars = [];
-function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-function createStars() { stars = []; for (let i=0;i<180;i++) stars.push({ x:Math.random()*canvas.width, y:Math.random()*canvas.height*0.6, r:Math.random()*1.2+0.2, alpha:Math.random()*0.7+0.1, speed:Math.random()*0.008+0.002, offset:Math.random()*Math.PI*2 }); }
-function drawStars(t) { ctx.clearRect(0,0,canvas.width,canvas.height); stars.forEach(s => { const a=s.alpha*(0.6+0.4*Math.sin(t*s.speed+s.offset)); ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2); ctx.fillStyle=`rgba(245,230,208,${a})`; ctx.fill(); }); requestAnimationFrame(drawStars); }
-resizeCanvas(); createStars(); requestAnimationFrame(drawStars);
-window.addEventListener('resize', () => { resizeCanvas(); createStars(); });
+/* ── STARS ── */
+(function() {
+  var canvas = document.getElementById('stars-canvas');
+  var ctx = canvas.getContext('2d');
+  var stars = [];
+  function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+  function createStars() { stars = []; for (var i=0;i<180;i++) stars.push({ x:Math.random()*canvas.width, y:Math.random()*canvas.height*0.6, r:Math.random()*1.2+0.2, alpha:Math.random()*0.7+0.1, speed:Math.random()*0.008+0.002, offset:Math.random()*Math.PI*2 }); }
+  function drawStars(t) { ctx.clearRect(0,0,canvas.width,canvas.height); stars.forEach(function(s) { var a=s.alpha*(0.6+0.4*Math.sin(t*s.speed+s.offset)); ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2); ctx.fillStyle='rgba(245,230,208,'+a+')'; ctx.fill(); }); requestAnimationFrame(drawStars); }
+  resizeCanvas(); createStars(); requestAnimationFrame(drawStars);
+  window.addEventListener('resize', function() { resizeCanvas(); createStars(); });
+})();
 
-/* FLOATING ICONS */
-const bbqIcons = ['🔥','🍖','🥩','🌽','🍗','🥖','🌿','✨','🍢','🫙'];
-const floatContainer = document.getElementById('floating-icons');
-function spawnFloatIcon() {
-  const el = document.createElement('div');
-  el.className = 'float-icon';
-  el.textContent = bbqIcons[Math.floor(Math.random()*bbqIcons.length)];
-  el.style.left = Math.random()*100 + 'vw';
-  el.style.bottom = '-60px';
-  el.style.fontSize = (18+Math.random()*20) + 'px';
-  const dur = 8+Math.random()*12;
-  el.style.animationDuration = dur + 's';
-  floatContainer.appendChild(el);
-  setTimeout(() => el.remove(), dur*1000);
+/* ── FLOATING ICONS ── */
+(function() {
+  var bbqIcons = ['🔥','🍗','🥩','🌽','🍗','🥖','🌿','✨','🍢','🪴'];
+  var floatContainer = document.getElementById('floating-icons');
+  function spawnFloatIcon() {
+    var el = document.createElement('div'); el.className = 'float-icon';
+    el.textContent = bbqIcons[Math.floor(Math.random()*bbqIcons.length)];
+    el.style.left = Math.random()*100 + 'vw'; el.style.bottom = '-60px';
+    el.style.fontSize = (18+Math.random()*20) + 'px';
+    var dur = 8+Math.random()*12; el.style.animationDuration = dur + 's';
+    floatContainer.appendChild(el); setTimeout(function() { el.remove(); }, dur*1000);
+  }
+  setInterval(spawnFloatIcon, 1200);
+  spawnFloatIcon(); spawnFloatIcon(); spawnFloatIcon();
+})();
+
+/* ── DETECT TOUCH ── */
+var isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+
+/* ── GLOW CURSOR desktop ── */
+var glowCursor = document.getElementById('glow-cursor');
+if (!isTouch) {
+  document.addEventListener('mousemove', function(e) {
+    glowCursor.style.left = e.clientX + 'px';
+    glowCursor.style.top  = e.clientY + 'px';
+  });
 }
-setInterval(spawnFloatIcon, 1200);
-spawnFloatIcon(); spawnFloatIcon(); spawnFloatIcon();
 
-/* GLOW CURSOR */
-const glowCursor = document.getElementById('glow-cursor');
-document.addEventListener('mousemove', e => {
-  glowCursor.style.left = e.clientX + 'px';
-  glowCursor.style.top  = e.clientY + 'px';
+/* ── TOUCH GLOW mobile ── */
+var touchGlow = document.getElementById('touch-glow');
+if (isTouch) {
+  document.addEventListener('touchmove', function(e) {
+    var t = e.touches[0];
+    touchGlow.style.left = t.clientX + 'px';
+    touchGlow.style.top  = t.clientY + 'px';
+  }, { passive: true });
+  document.addEventListener('touchstart', function(e) {
+    var t = e.touches[0];
+    touchGlow.style.left = t.clientX + 'px';
+    touchGlow.style.top  = t.clientY + 'px';
+  }, { passive: true });
+}
+
+/* ── TILT CARDS desktop ── */
+if (!isTouch) {
+  document.querySelectorAll('[data-tilt]').forEach(function(card) {
+    card.addEventListener('mousemove', function(e) {
+      var rect = card.getBoundingClientRect();
+      var dx = (e.clientX - rect.left - rect.width/2) / (rect.width/2);
+      var dy = (e.clientY - rect.top - rect.height/2) / (rect.height/2);
+      card.style.transition = 'transform 0.1s ease, border-color 0.3s, box-shadow 0.3s';
+      card.style.transform = 'perspective(600px) rotateY('+dx*8+'deg) rotateX('+(-dy*8)+'deg) scale(1.03)';
+    });
+    card.addEventListener('mouseleave', function() {
+      card.style.transition = 'transform 0.5s ease, border-color 0.3s, box-shadow 0.3s';
+      card.style.transform = 'perspective(600px) rotateY(0) rotateX(0) scale(1)';
+    });
+  });
+}
+
+/* ── TAP GLOW mobile cards ── */
+if (isTouch) {
+  document.querySelectorAll('[data-tilt]').forEach(function(card) {
+    card.addEventListener('touchstart', function() { card.classList.add('tapped'); }, { passive: true });
+    card.addEventListener('touchend', function() { setTimeout(function() { card.classList.remove('tapped'); }, 600); }, { passive: true });
+  });
+}
+
+/* ══════════════════════════════════════
+   GAME TABS
+══════════════════════════════════════ */
+document.querySelectorAll('.game-tab').forEach(function(tab) {
+  tab.addEventListener('click', function() {
+    document.querySelectorAll('.game-tab').forEach(function(t) { t.classList.remove('active'); });
+    document.querySelectorAll('.game-panel').forEach(function(p) { p.classList.remove('active'); });
+    tab.classList.add('active');
+    document.getElementById('panel-' + tab.dataset.tab).classList.add('active');
+  });
 });
 
-/* TILT CARDS */
-document.querySelectorAll('[data-tilt]').forEach(card => {
-  card.addEventListener('mousemove', e => {
-    const rect = card.getBoundingClientRect();
-    const dx = (e.clientX - rect.left - rect.width/2) / (rect.width/2);
-    const dy = (e.clientY - rect.top - rect.height/2) / (rect.height/2);
-    card.style.transition = 'transform 0.1s ease, border-color 0.3s, box-shadow 0.3s';
-    card.style.transform = `perspective(600px) rotateY(${dx*8}deg) rotateX(${-dy*8}deg) scale(1.03)`;
+/* ══════════════════════════════════════
+   GRILL MASTER
+══════════════════════════════════════ */
+(function() {
+  var gmCanvas = document.getElementById('gm-canvas');
+  if (!gmCanvas) return;
+  var gmCtx = gmCanvas.getContext('2d');
+  var gmOverlay = document.getElementById('gm-overlay');
+  var gmResult = document.getElementById('gm-result');
+  var gmScoreEl = document.getElementById('gm-score');
+  var gmBestEl = document.getElementById('gm-best');
+  var gmLivesEl = document.getElementById('gm-lives');
+  var FOODS = ['🍗','🥩','🌽','🍍','🥩','🍗'];
+  var score=0, lives=3, running=false, animId=null;
+  var tray={x:0,w:90,h:14}, items=[], spawnTimer=0, spawnInterval=90, speed=2.2;
+  var best = parseInt(localStorage.getItem('gm_best')||'0');
+  gmBestEl.textContent = best;
+  function resizeGM() { gmCanvas.width=gmCanvas.offsetWidth; gmCanvas.height=gmCanvas.offsetHeight; tray.x=gmCanvas.width/2-tray.w/2; }
+  function spawnItem() { var burnt=Math.random()<0.22; items.push({x:Math.random()*(gmCanvas.width-30)+15,y:-30,emoji:burnt?'🔥':FOODS[Math.floor(Math.random()*FOODS.length)],burnt:burnt,speed:speed+(Math.random()*.8)}); }
+  function drawTray() { var x=tray.x,y=gmCanvas.height-40,w=tray.w,h=tray.h; gmCtx.save(); var g=gmCtx.createLinearGradient(x,y,x,y+h); g.addColorStop(0,'#4a2e10'); g.addColorStop(1,'#2a1808'); gmCtx.fillStyle=g; gmCtx.beginPath(); gmCtx.roundRect(x,y,w,h,4); gmCtx.fill(); gmCtx.strokeStyle='#C04828'; gmCtx.lineWidth=1.5; gmCtx.stroke(); gmCtx.restore(); }
+  function livesStr() { return ['❤️❤️❤️','❤️❤️🖤','❤️🖤🖤','🖤🖤🖤'][3-Math.max(0,lives)]; }
+  function gmUpdate() {
+    gmCtx.clearRect(0,0,gmCanvas.width,gmCanvas.height);
+    spawnTimer++; if(spawnTimer>=spawnInterval){spawnItem();spawnTimer=0;if(spawnInterval>40)spawnInterval-=0.4;speed+=0.005;}
+    var ty=gmCanvas.height-40;
+    items = items.filter(function(item){
+      item.y+=item.speed;
+      gmCtx.font='22px serif'; gmCtx.textAlign='center'; gmCtx.textBaseline='middle';
+      gmCtx.fillText(item.emoji,item.x,item.y);
+      if(item.y+10>=ty&&item.y-10<=ty+tray.h&&item.x>=tray.x&&item.x<=tray.x+tray.w){
+        if(item.burnt){score=Math.max(0,score-20);lives--;gmLivesEl.textContent=livesStr();gmScoreEl.textContent=score;}
+        else{score+=10;gmScoreEl.textContent=score;}
+        if(score>=100){endGM(true);return false;} if(lives<=0){endGM(false);return false;} return false;
+      }
+      if(item.y>gmCanvas.height+40) return false; return true;
+    });
+    drawTray(); if(running) animId=requestAnimationFrame(gmUpdate);
+  }
+  function endGM(won) { running=false; cancelAnimationFrame(animId); if(score>best){best=score;localStorage.setItem('gm_best',best);gmBestEl.textContent=best;} gmResult.style.display='block'; document.getElementById('gm-result-title').textContent=won?'Certified Grill Supervisor 👨‍🍳':'Better luck next batch 🔥'; document.getElementById('gm-result-msg').textContent=won?'Score: '+score+' — You have earned the right to stand near the grill.':'Score: '+score+' — The grill has no mercy. Try again.'; }
+  function startGM() { gmOverlay.style.display='none'; gmResult.style.display='none'; score=0;lives=3;items=[];spawnTimer=0;spawnInterval=90;speed=2.2; gmScoreEl.textContent=0; gmLivesEl.textContent='❤️❤️❤️'; running=true; resizeGM(); gmUpdate(); }
+  document.getElementById('gm-start-btn').addEventListener('click', startGM);
+  document.getElementById('gm-retry-btn').addEventListener('click', startGM);
+  document.getElementById('gm-canvas-wrap').addEventListener('mousemove', function(e){var r=gmCanvas.getBoundingClientRect(),sx=gmCanvas.width/r.width;tray.x=Math.max(0,Math.min(gmCanvas.width-tray.w,(e.clientX-r.left)*sx-tray.w/2));});
+  document.getElementById('gm-canvas-wrap').addEventListener('touchmove', function(e){e.preventDefault();var r=gmCanvas.getBoundingClientRect(),sx=gmCanvas.width/r.width;tray.x=Math.max(0,Math.min(gmCanvas.width-tray.w,(e.touches[0].clientX-r.left)*sx-tray.w/2));},{passive:false});
+  resizeGM(); window.addEventListener('resize', resizeGM);
+})();
+
+/* ══════════════════════════════════════
+   BBQ TETRIS
+══════════════════════════════════════ */
+(function() {
+  var tc = document.getElementById('tet-canvas'); if(!tc) return;
+  var tctx = tc.getContext('2d');
+  var nc = document.getElementById('tet-next'); var nctx = nc.getContext('2d');
+  var tOverlay = document.getElementById('tet-overlay');
+  var COLS=10,ROWS=20,SZ=20;
+  var EMOJIS=['🍗','🥩','🌽','🥖','🍍','🍢','🧅'];
+  var COLORS=['#C04828','#EF9F27','#5a8a2a','#8a5a2a','#c48020','#7a4a20','#9a7030'];
+  var PIECES=[[[1,1,1,1]],[[1,1],[1,1]],[[0,1,0],[1,1,1]],[[1,0],[1,0],[1,1]],[[0,1],[0,1],[1,1]],[[1,1,0],[0,1,1]],[[0,1,1],[1,1,0]]];
+  var board,tscore,tlines,trunning,tAnimId,dropCounter,dropInterval,lastTime,cur,nxt;
+  var tbest=parseInt(localStorage.getItem('tet_best')||'0'); document.getElementById('tet-best').textContent=tbest;
+  function newBoard(){return Array.from({length:ROWS},function(){return Array(COLS).fill(null);});}
+  function rp(){var i=Math.floor(Math.random()*PIECES.length);return{shape:JSON.parse(JSON.stringify(PIECES[i])),x:Math.floor(COLS/2)-Math.floor(PIECES[i][0].length/2),y:0,color:COLORS[i],emoji:EMOJIS[i]};}
+  function collide(b,p){for(var r=0;r<p.shape.length;r++)for(var c=0;c<p.shape[r].length;c++){if(p.shape[r][c]&&(p.y+r>=ROWS||p.x+c<0||p.x+c>=COLS||b[p.y+r][p.x+c]))return true;}return false;}
+  function merge(b,p){p.shape.forEach(function(row,r){row.forEach(function(v,c){if(v)b[p.y+r][p.x+c]={color:p.color,emoji:p.emoji};});});}
+  function clearLines(b){var cl=0;for(var r=ROWS-1;r>=0;r--){if(b[r].every(function(c){return c;})){b.splice(r,1);b.unshift(Array(COLS).fill(null));cl++;r++;}}return cl;}
+  function dcell(cell,x,y,sz,c){c.fillStyle=cell.color+'33';c.fillRect(x,y,sz,sz);c.strokeStyle=cell.color+'88';c.strokeRect(x+.5,y+.5,sz-1,sz-1);c.font=(sz*.7)+'px serif';c.textAlign='center';c.textBaseline='middle';c.fillText(cell.emoji,x+sz/2,y+sz/2);}
+  function tdraw(){tctx.fillStyle='#0a0704';tctx.fillRect(0,0,tc.width,tc.height);board.forEach(function(row,r){row.forEach(function(cell,c){if(cell)dcell(cell,c*SZ,r*SZ,SZ,tctx);});});if(cur)cur.shape.forEach(function(row,r){row.forEach(function(v,c){if(v)dcell({color:cur.color,emoji:cur.emoji},(cur.x+c)*SZ,(cur.y+r)*SZ,SZ,tctx);});});nctx.fillStyle='#110e09';nctx.fillRect(0,0,80,80);if(nxt){var ox=(4-nxt.shape[0].length)/2*SZ*.7,oy=(4-nxt.shape.length)/2*SZ*.7;nxt.shape.forEach(function(row,r){row.forEach(function(v,c){if(v)dcell({color:nxt.color,emoji:nxt.emoji},ox+c*SZ*.7,oy+r*SZ*.7,SZ*.7,nctx);});});}}
+  function smoke(){var s=document.getElementById('tet-smoke');for(var i=0;i<5;i++){(function(idx){var p=document.createElement('div');p.className='smoke-puff';p.textContent='💨';p.style.left=(idx/4)*100+'%';p.style.top='80%';s.appendChild(p);setTimeout(function(){p.remove();},900);})(i);}}
+  function tloop(ts){ts=ts||0;var dt=ts-lastTime;lastTime=ts;dropCounter+=dt;if(dropCounter>dropInterval){cur.y++;if(collide(board,cur)){cur.y--;merge(board,cur);var cl=clearLines(board);if(cl){tlines+=cl;tscore+=cl*100;document.getElementById('tet-score').textContent=tscore;document.getElementById('tet-lines').textContent=tlines;smoke();dropInterval=Math.max(200,800-tlines*20);}if(tscore>tbest){tbest=tscore;localStorage.setItem('tet_best',tbest);document.getElementById('tet-best').textContent=tbest;}cur=nxt;nxt=rp();if(collide(board,cur)){tend();return;}}dropCounter=0;}tdraw();if(trunning)tAnimId=requestAnimationFrame(tloop);}
+  function tend(){trunning=false;cancelAnimationFrame(tAnimId);tOverlay.querySelector('h3').textContent='Game Over 🔥';tOverlay.querySelector('p').textContent='Score: '+tscore;tOverlay.querySelector('button').textContent='Stack Again';tOverlay.style.display='flex';}
+  function tstart(){board=newBoard();tscore=0;tlines=0;dropCounter=0;dropInterval=800;lastTime=0;trunning=true;document.getElementById('tet-score').textContent=0;document.getElementById('tet-lines').textContent=0;cur=rp();nxt=rp();tOverlay.style.display='none';requestAnimationFrame(tloop);}
+  document.getElementById('tet-start-btn').addEventListener('click',tstart);
+  document.addEventListener('keydown',function(e){if(!trunning||['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].indexOf(e.key)<0)return;e.preventDefault();if(e.key==='ArrowLeft'){cur.x--;if(collide(board,cur))cur.x++;}if(e.key==='ArrowRight'){cur.x++;if(collide(board,cur))cur.x--;}if(e.key==='ArrowDown'){cur.y++;if(collide(board,cur))cur.y--;dropCounter=0;}if(e.key==='ArrowUp'){var rot=cur.shape[0].map(function(_,c){return cur.shape.map(function(row){return row[c];}).reverse();});var prev=cur.shape;cur.shape=rot;if(collide(board,cur))cur.shape=prev;}});
+  var tx0=0,ty0=0;tc.addEventListener('touchstart',function(e){tx0=e.touches[0].clientX;ty0=e.touches[0].clientY;},{passive:true});
+  tc.addEventListener('touchend',function(e){if(!trunning)return;var dx=e.changedTouches[0].clientX-tx0,dy=e.changedTouches[0].clientY-ty0;if(Math.abs(dx)>Math.abs(dy)){if(dx>20){cur.x++;if(collide(board,cur))cur.x--;}else if(dx<-20){cur.x--;if(collide(board,cur))cur.x++;}}else{if(dy>20){cur.y++;if(collide(board,cur))cur.y--;}else{var rot=cur.shape[0].map(function(_,c){return cur.shape.map(function(row){return row[c];}).reverse();});var prev=cur.shape;cur.shape=rot;if(collide(board,cur))cur.shape=prev;}}},{passive:true});
+  tdraw();
+})();
+
+/* ══════════════════════════════════════
+   PARTY TAGS
+══════════════════════════════════════ */
+(function() {
+  var DEFAULT_TAGS = ['#KhansGrillAndChill','#KhansBBQ','#TerraceBBQ','#BangaloreBBQ','#GrillAndChill','#HalalBBQ','#BBQNight','#BTMBangalore','#GrillMaster','#TerraceVibes','#FamilyBBQ','#SmokeAndSizzle','#MeatOnRotation','#ChutneyPolitics','#GrillSupervisor','#BangaloreNights','#BBQLife','#KhansInCharge','#SkiesAboveFireBelow','#NightGrill','#FamilyNight','#HalalFood','#IndianBBQ','#GrillCertified','#SecondRounds','#TerraceDiaries'];
+  var cloud = document.getElementById('tags-cloud');
+  var copyAllBtn = document.getElementById('copy-all-btn');
+  var resetBtn = document.getElementById('reset-tags-btn');
+  var note = document.getElementById('tags-note');
+  var input = document.getElementById('tag-input');
+  var addBtn = document.getElementById('tag-add-btn');
+  if (!cloud || !copyAllBtn || !note || !input || !addBtn) return;
+
+  var customTags = [];
+  try { customTags = JSON.parse(localStorage.getItem('bbq_custom_tags') || '[]'); } catch(e) { customTags = []; }
+  function saveCustom() { try { localStorage.setItem('bbq_custom_tags', JSON.stringify(customTags)); } catch(e) {} }
+
+  function copyText(text, el, labelEl) {
+    navigator.clipboard.writeText(text).then(function() {
+      var orig = labelEl.textContent; labelEl.textContent = '✓ Copied';
+      el.classList.add('copied');
+      setTimeout(function() { labelEl.textContent = orig; el.classList.remove('copied'); }, 1400);
+    }).catch(function() {});
+  }
+
+  function makeTag(text, isCustom) {
+    var el = document.createElement('div');
+    el.className = 'tag' + (isCustom ? ' custom' : '');
+    var label = document.createElement('span');
+    label.textContent = text;
+    el.appendChild(label);
+    if (isCustom) {
+      var rm = document.createElement('span');
+      rm.className = 'tag-remove'; rm.textContent = ' ✕';
+      rm.addEventListener('click', function(e) {
+        e.stopPropagation();
+        customTags = customTags.filter(function(t) { return t !== text; });
+        saveCustom(); el.remove(); updateNote();
+      });
+      el.appendChild(rm);
+    }
+    el.addEventListener('click', function() { copyText(text, el, label); });
+    return el;
+  }
+
+  function updateNote() {
+    var total = DEFAULT_TAGS.length + customTags.length;
+    note.textContent = total + ' tags · Tap to copy · Custom tags auto-saved';
+  }
+
+  function renderAll() {
+    cloud.innerHTML = '';
+    DEFAULT_TAGS.forEach(function(t) { cloud.appendChild(makeTag(t, false)); });
+    customTags.forEach(function(t) { cloud.appendChild(makeTag(t, true)); });
+    updateNote();
+  }
+
+  function addTag() {
+    var val = input.value.trim();
+    if (!val) return;
+    if (val.charAt(0) !== '#') val = '#' + val;
+    val = val.replace(/\s+/g, '');
+    if (DEFAULT_TAGS.indexOf(val) >= 0 || customTags.indexOf(val) >= 0) {
+      input.style.borderColor = 'var(--ember)';
+      setTimeout(function() { input.style.borderColor = ''; }, 800);
+      input.value = ''; return;
+    }
+    customTags.push(val); saveCustom();
+    var newEl = makeTag(val, true);
+    cloud.appendChild(newEl); input.value = ''; input.focus(); updateNote();
+    newEl.style.borderColor = 'var(--flame)';
+    setTimeout(function() { newEl.style.borderColor = ''; }, 1200);
+  }
+
+  addBtn.addEventListener('click', addTag);
+  input.addEventListener('keydown', function(e) { if (e.key === 'Enter') addTag(); });
+
+  copyAllBtn.addEventListener('click', function() {
+    var all = DEFAULT_TAGS.concat(customTags);
+    navigator.clipboard.writeText(all.join(' ')).then(function() {
+      copyAllBtn.textContent = '✓ All Copied!'; copyAllBtn.classList.add('done');
+      note.textContent = 'All ' + all.length + ' tags copied to clipboard';
+      setTimeout(function() { copyAllBtn.textContent = 'Copy All Tags'; copyAllBtn.classList.remove('done'); updateNote(); }, 2000);
+    });
   });
-  card.addEventListener('mouseleave', () => {
-    card.style.transition = 'transform 0.5s ease, border-color 0.3s, box-shadow 0.3s';
-    card.style.transform = 'perspective(600px) rotateY(0) rotateX(0) scale(1)';
-  });
-});
+
+  if (resetBtn) {
+    resetBtn.addEventListener('click', function() {
+      if (!confirm('Remove all custom tags and reset to defaults?')) return;
+      customTags = []; saveCustom(); renderAll();
+    });
+  }
+
+  renderAll();
+})();
 </script>
 </body>
 </html>
