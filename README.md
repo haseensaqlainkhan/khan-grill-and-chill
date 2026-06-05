@@ -1,2 +1,2 @@
-# khan-grill-and-chill
+# khans-grill-and-chill
 Khan's BBQ Party — BTM, Bangalore
